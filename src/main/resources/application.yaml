@@ -14,5 +14,5 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: validate   # или none, если используете Liquibase
+      ddl-auto: validate
     show-sql: false
