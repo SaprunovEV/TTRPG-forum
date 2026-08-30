@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-forum-schema
+      author: sapra
+      changes:
+        - sql:
+            sql: CREATE SCHEMA IF NOT EXISTS forum;
