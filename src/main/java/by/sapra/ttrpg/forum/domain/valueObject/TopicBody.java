@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Embeddable
 @Data
-public class TitleBody {
+public class TopicBody {
     @Column(name = "title", nullable = false)
     private String title;
     @Column(name = "content", columnDefinition = "TEXT")

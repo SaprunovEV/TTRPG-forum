@@ -2,7 +2,7 @@ package by.sapra.ttrpg.forum.domain.aggregate;
 
 import by.sapra.ttrpg.forum.domain.entityObject.MessageInfo;
 import by.sapra.ttrpg.forum.domain.valueObject.Category;
-import by.sapra.ttrpg.forum.domain.valueObject.TitleBody;
+import by.sapra.ttrpg.forum.domain.valueObject.TopicBody;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,7 +20,7 @@ public class Topic {
     private MessageInfo messageInfo;
 
     @Embedded
-    private TitleBody body;
+    private TopicBody body;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
