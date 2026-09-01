@@ -17,7 +17,7 @@ public class MessageInfo {
 
     @Embedded
     @AttributeOverride(name = "userId", column = @Column(name = "author_id", nullable = false))
-    private User user;
+    private User author;
 
     @Embedded
     private DateInfo dateInfo;
