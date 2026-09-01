@@ -9,7 +9,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGSERIAL
+                  type: BIGINT
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -33,6 +33,11 @@ databaseChangeLog:
               - column:
                   name: title
                   type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content
+                  type: TEXT
                   constraints:
                     nullable: false
               - column:
