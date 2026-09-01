@@ -13,3 +13,5 @@ databaseChangeLog:
       file: db/changelog/v1-0/create-category-table.yaml
   - include:
       file: db/changelog/v1-0/add-foreignKey-to-topic-category.yaml
+  - include:
+      file: db/changelog/v1-0/create-comment-table.yaml
