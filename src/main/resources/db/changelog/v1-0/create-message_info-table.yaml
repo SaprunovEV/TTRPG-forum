@@ -15,7 +15,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: author
+                  name: author_id
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
