@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-category-table-v1-0
+      author: "Евгений С"
+      changes:
+        - createTable:
+            schemaName: forum
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: title
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
