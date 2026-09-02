@@ -1,17 +1,21 @@
 package by.sapra.ttrpg.forum.domain.entityObject;
 
 import by.sapra.ttrpg.forum.domain.aggregate.Topic;
+import by.sapra.ttrpg.forum.domain.valueObject.Category;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.UUID;
 
 @Entity
-@Data
 @Table(name = "comment", schema = "forum")
+@Getter
+@Setter
+@ToString(onlyExplicitlyIncluded = true)
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @ToString.Include
     private UUID id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
@@ -27,5 +31,18 @@ public class Comment {
     private Comment parentComment;
 
     @Column(name = "content")
+    @ToString.Include
     private String content;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Comment comment)) return false;
+        return id != null && id.equals(comment.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

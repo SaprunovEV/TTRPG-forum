@@ -1,24 +1,47 @@
 package by.sapra.ttrpg.forum.domain.entityObject;
 
-import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.UUID;
 
 @Entity
-@Data
 @Table(name = "like", schema = "forum")
+@Getter
+@Setter
+@ToString(onlyExplicitlyIncluded = true)
 public class Like {
     @EmbeddedId
     private LikeId id;
+
     @Column(name = "like_value", nullable = false)
+    @ToString.Include
     private Integer value;
 
+    @ToString.Include
     public String getUserId() {
         return id != null ? id.getUserId() : null;
     }
 
+    @ToString.Include
     public UUID getMessageId() {
         return id != null ? id.getMessageId() : null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Like like)) return false;
+        return id != null && id.equals(like.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
