@@ -6,14 +6,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "message_info", schema = "forum")
 public class MessageInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Embedded
     @AttributeOverride(name = "userId", column = @Column(name = "author_id", nullable = false))

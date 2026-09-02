@@ -9,8 +9,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
-                  autoIncrement: true
+                  type: UUID
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -21,11 +20,11 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: create_at
-                  type: TIMESTAMP
+                  type: TIMESTAMPTZ
                   constraints:
                     nullable: false
               - column:
                   name: update_at
-                  type: TIMESTAMP
+                  type: TIMESTAMPTZ
                   constraints:
                     nullable: true

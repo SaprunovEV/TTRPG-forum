@@ -4,6 +4,8 @@ import by.sapra.ttrpg.forum.domain.valueObject.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Embeddable
 @Setter
 @NoArgsConstructor
@@ -21,7 +23,7 @@ public class LikeId {
         return user.getUserId();
     }
 
-    public Long getMessageId() {
+    public UUID getMessageId() {
         return messageInfo.getId();
     }
 }

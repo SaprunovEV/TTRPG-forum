@@ -9,14 +9,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
-                  autoIncrement: true
+                  type: UUID
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
                   name: message_info_id
-                  type: BIGINT
+                  type: UUID
                   constraints:
                     nullable: false
                     unique: true
@@ -25,12 +24,12 @@ databaseChangeLog:
                  type: TEXT
               - column:
                   name: topic_id
-                  type: BIGINT
+                  type: UUID
                   constraints:
                     nullable: false
               - column:
                   name: parent_comment_id
-                  type: BIGINT
+                  type: UUID
                   constraints:
                     nullable: true
 

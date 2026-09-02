@@ -3,6 +3,8 @@ package by.sapra.ttrpg.forum.domain.entityObject;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Entity
 @Data
 @Table(name = "like", schema = "forum")
@@ -16,7 +18,7 @@ public class Like {
         return id != null ? id.getUserId() : null;
     }
 
-    public Long getMessageId() {
+    public UUID getMessageId() {
         return id != null ? id.getMessageId() : null;
     }
 }

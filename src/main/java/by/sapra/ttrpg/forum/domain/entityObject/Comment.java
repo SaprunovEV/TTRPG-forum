@@ -4,13 +4,15 @@ import by.sapra.ttrpg.forum.domain.aggregate.Topic;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Entity
 @Data
 @Table(name = "comment", schema = "forum")
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "message_info_id", referencedColumnName = "id", nullable = false, unique = true)
