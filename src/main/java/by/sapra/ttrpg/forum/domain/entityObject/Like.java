@@ -1,9 +1,6 @@
 package by.sapra.ttrpg.forum.domain.entityObject;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,6 +19,10 @@ public class Like {
     @Column(name = "like_value", nullable = false)
     @ToString.Include
     private Integer value;
+
+    @MapsId("messageId")
+    @ManyToOne()
+    private MessageInfo message;
 
     @ToString.Include
     public String getUserId() {
