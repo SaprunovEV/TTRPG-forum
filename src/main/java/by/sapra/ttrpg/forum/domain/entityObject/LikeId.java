@@ -17,9 +17,7 @@ public class LikeId {
     @ToString.Include
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "message_id", referencedColumnName = "id")
-    private MessageInfo messageInfo;
+    private UUID messageId;
 
     public String getUserId() {
         return user.getUserId();
@@ -27,7 +25,7 @@ public class LikeId {
 
     @ToString.Include
     public UUID getMessageId() {
-        return messageInfo.getId();
+        return this.messageId;
     }
 
     @Override
