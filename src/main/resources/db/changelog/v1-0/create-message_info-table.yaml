@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-message_info-table-v1-0
+      author: "Евгений С"
+      changes:
+        - createTable:
+            schemaName: forum
+            tableName: message_info
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: author_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_at
+                  type: TIMESTAMPTZ
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_at
+                  type: TIMESTAMPTZ
+                  constraints:
+                    nullable: true

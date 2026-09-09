@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-foreignKey-like-message_info-v1-0
+      author: "Евгений С"
+      changes:
+        - addForeignKeyConstraint:
+            baseTableSchemaName: forum
+            baseTableName: like
+            baseColumnNames: message_id
+            referencedTableSchemaName: forum
+            referencedTableName: message_info
+            referencedColumnNames: id
+            constraintName: fk-like-message_info
+            onDelete: CASCADE
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableSchemaName: forum
+            baseTableName: like
+            constraintName: fk-like-message_info
