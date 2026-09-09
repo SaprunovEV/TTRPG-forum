@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_TTRPG:-postgres}
       POSTGRES_DB: ttrpg-forum
     volumes:
-      - postgres_data:/var/libs/postgres/data
+      - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
     command:
       - "postgres"
@@ -22,7 +22,7 @@ services:
     networks:
       - "ttrpg_network"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER_TTRPG:-postgres} -d ${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
