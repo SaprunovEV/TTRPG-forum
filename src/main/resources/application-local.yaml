@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: TTRPG-forumApp
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    default-schema: forum
+    liquibase-schema: public
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ttrpg-forum
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      format_sql: true
+    show-sql: true
