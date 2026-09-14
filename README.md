@@ -14,3 +14,15 @@
 ## Устройство базы данных
 
 ![db schema](files/forumdb.png)
+
+## Работа с базой локально
+### Запуск
+```shell
+cd infra
+docker-compose up
+```
+### Остановка
+```shell
+cd infra
+docker-compose down
+```

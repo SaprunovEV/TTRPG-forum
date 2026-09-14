@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-fk-topic-category-v1-0
+      author: "Евгений С"
+      changes:
+        - addForeignKeyConstraint:
+            baseTableSchemaName: forum
+            baseTableName: topic
+            baseColumnNames: category_id
+            referencedTableSchemaName: forum
+            referencedTableName: category
+            referencedColumnNames: id
+            constraintName: fk_topic_category
+            onDelete: CASCADE
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableSchemaName: forum
+            baseTableName: topic
+            constraintName: fk_topic_category

@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: postgres-ttrpg
+    ports:
+      - "${POSTGRES_TTRPG_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER_TTRPG:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_TTRPG:-postgres}
+      POSTGRES_DB: ttrpg-forum
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    command:
+      - "postgres"
+      - "-c"
+      - "max_connections=100"
+      - "-c"
+      - "shared_buffers=256MB"
+      - "-c"
+      - "wal_level=logical"
+    networks:
+      - "ttrpg_network"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER_TTRPG:-postgres} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    name: postgres_data_ttrpg
+
+networks:
+  ttrpg_network:
+    name: ttrpg_network
+    driver: bridge
