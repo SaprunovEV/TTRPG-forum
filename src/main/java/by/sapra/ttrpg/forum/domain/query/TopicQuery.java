@@ -1,4 +1,4 @@
-package by.sapra.ttrpg.forum.application.queries;
+package by.sapra.ttrpg.forum.domain.query;
 
 import by.sapra.ttrpg.forum.domain.aggregate.TopicId;
 import org.springframework.data.domain.Pageable;
