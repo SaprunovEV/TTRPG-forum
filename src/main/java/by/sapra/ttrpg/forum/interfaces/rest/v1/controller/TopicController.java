@@ -16,7 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/api/topics")
+@RequestMapping("/api/v1/topics")
 @RequiredArgsConstructor
 public class TopicController {
     private final TopicService service;
