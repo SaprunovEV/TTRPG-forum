@@ -1,4 +1,4 @@
 package by.sapra.ttrpg.forum.domain.query;
 
-public record MeaageInfoQuery() {
+public record MassageInfoQuery() {
 }
