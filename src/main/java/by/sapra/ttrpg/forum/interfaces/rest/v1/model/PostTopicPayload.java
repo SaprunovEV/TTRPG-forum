@@ -1,4 +1,10 @@
 package by.sapra.ttrpg.forum.interfaces.rest.v1.model;
 
-public record PostTopicPayload() {
+import java.util.UUID;
+
+public record PostTopicPayload(
+        String title,
+        String content,
+        UUID category
+) {
 }
