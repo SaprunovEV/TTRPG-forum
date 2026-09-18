@@ -3,6 +3,7 @@ package by.sapra.ttrpg.forum.interfaces.rest.v1.mapper;
 import by.sapra.ttrpg.forum.domain.command.AddNewTopicCommand;
 import by.sapra.ttrpg.forum.domain.command.CommentTopicCommand;
 import by.sapra.ttrpg.forum.domain.command.LikeMessageCommand;
+import by.sapra.ttrpg.forum.domain.query.FeedQuery;
 import by.sapra.ttrpg.forum.domain.query.TopicQuery;
 import by.sapra.ttrpg.forum.domain.aggregate.Topic;
 import by.sapra.ttrpg.forum.domain.entityObject.Comment;
