@@ -1,13 +1,13 @@
 package by.sapra.ttrpg.forum.domain.entityObject;
 
 import by.sapra.ttrpg.forum.domain.aggregate.MessageInfo;
-import by.sapra.ttrpg.forum.domain.aggregate.MessageId;
 import by.sapra.ttrpg.forum.domain.valueObject.Category;
 import by.sapra.ttrpg.forum.domain.valueObject.TopicBody;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity

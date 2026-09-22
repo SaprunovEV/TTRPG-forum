@@ -1,10 +1,11 @@
 package by.sapra.ttrpg.forum.domain.aggregate;
 
-import by.sapra.ttrpg.forum.domain.entityObject.Topic;
 import by.sapra.ttrpg.forum.domain.valueObject.DateInfo;
 import by.sapra.ttrpg.forum.domain.valueObject.User;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Objects;
 import java.util.UUID;
