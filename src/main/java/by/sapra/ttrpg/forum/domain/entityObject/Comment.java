@@ -1,6 +1,6 @@
 package by.sapra.ttrpg.forum.domain.entityObject;
 
-import by.sapra.ttrpg.forum.domain.aggregate.Topic;
+import by.sapra.ttrpg.forum.domain.aggregate.MessageInfo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,7 @@
-package by.sapra.ttrpg.forum.domain.aggregate;
+package by.sapra.ttrpg.forum.domain.entityObject;
 
-import by.sapra.ttrpg.forum.domain.entityObject.MessageInfo;
+import by.sapra.ttrpg.forum.domain.aggregate.MessageInfo;
+import by.sapra.ttrpg.forum.domain.aggregate.MessageId;
 import by.sapra.ttrpg.forum.domain.valueObject.Category;
 import by.sapra.ttrpg.forum.domain.valueObject.TopicBody;
 import jakarta.persistence.*;
@@ -20,10 +21,6 @@ public class Topic {
     @ToString.Include
     private UUID id;
 
-    @Embedded
-    @ToString.Include
-    private TopicId topicId;
-
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "message_info_id", referencedColumnName = "id", nullable = false, unique = true)
     private MessageInfo messageInfo;
@@ -40,11 +37,11 @@ public class Topic {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Topic topic)) return false;
-        return topicId != null && topicId.equals(topic.getTopicId());
+        return id != null && id.equals(topic.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(topicId);
+        return getClass().hashCode();
     }
 }
