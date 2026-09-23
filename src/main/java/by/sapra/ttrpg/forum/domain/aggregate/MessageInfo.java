@@ -1,10 +1,13 @@
-package by.sapra.ttrpg.forum.domain.entityObject;
+package by.sapra.ttrpg.forum.domain.aggregate;
 
 import by.sapra.ttrpg.forum.domain.valueObject.DateInfo;
 import by.sapra.ttrpg.forum.domain.valueObject.User;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -19,6 +22,10 @@ public class MessageInfo {
     private UUID id;
 
     @Embedded
+    @ToString.Include
+    private MessageId messageId;
+
+    @Embedded
     @AttributeOverride(name = "userId", column = @Column(name = "author_id", nullable = false))
     @ToString.Include
     private User author;
@@ -30,12 +37,12 @@ public class MessageInfo {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MessageInfo mf)) return false;
-        return id != null && id.equals(mf.getId());
+        if (!(o instanceof MessageInfo messageInfo)) return false;
+        return messageId != null && messageId.equals(messageInfo.getMessageId());
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hashCode(messageId);
     }
 }

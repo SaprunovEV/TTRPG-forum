@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Embeddable
 @Data
-public class TopicId {
+public class MessageId {
     @Column(name = "business_id", nullable = false, unique = true)
     private String businessId;
 }
