@@ -1,0 +1,4 @@
+package by.sapra.ttrpg.forum.domain.command;
+
+public record CommentTopicCommand() {
+}
