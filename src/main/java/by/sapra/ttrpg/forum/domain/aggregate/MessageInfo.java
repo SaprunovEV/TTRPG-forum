@@ -1,5 +1,7 @@
 package by.sapra.ttrpg.forum.domain.aggregate;
 
+import by.sapra.ttrpg.forum.domain.entityObject.Comment;
+import by.sapra.ttrpg.forum.domain.entityObject.Topic;
 import by.sapra.ttrpg.forum.domain.valueObject.DateInfo;
 import by.sapra.ttrpg.forum.domain.valueObject.User;
 import jakarta.persistence.*;
@@ -33,6 +35,12 @@ public class MessageInfo {
     @Embedded
     @ToString.Include
     private DateInfo dateInfo = new DateInfo();
+
+    @OneToOne(mappedBy = "messageInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Topic topic;
+
+    @OneToOne(mappedBy = "messageInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Comment comment;
 
     @Override
     public boolean equals(Object o) {
