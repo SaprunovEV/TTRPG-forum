@@ -4,8 +4,6 @@ import java.util.List;
 
 public record PageResource<T>(
         Integer size,
-        Integer limit,
-        Integer offset,
         List<T> data
 ) {
 }

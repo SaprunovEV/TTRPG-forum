@@ -36,10 +36,10 @@ public class MessageInfo {
     @ToString.Include
     private DateInfo dateInfo = new DateInfo();
 
-    @OneToOne(mappedBy = "messageInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "messageInfo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Topic topic;
 
-    @OneToOne(mappedBy = "messageInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "messageInfo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Comment comment;
 
     @Override

@@ -23,7 +23,7 @@ public class Topic {
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "message_info_id", referencedColumnName = "id", nullable = false, unique = true)
-    private MessageInfo messageInfo;
+    private MessageInfo massageInfo;
 
     @Embedded
     @ToString.Include
