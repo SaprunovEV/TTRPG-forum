@@ -1,13 +1,13 @@
 package by.sapra.ttrpg.forum.interfaces.rest.v1.mapper;
 
+import by.sapra.ttrpg.forum.domain.aggregate.MessageInfo;
 import by.sapra.ttrpg.forum.domain.command.AddNewTopicCommand;
 import by.sapra.ttrpg.forum.domain.command.CommentTopicCommand;
 import by.sapra.ttrpg.forum.domain.command.LikeMessageCommand;
+import by.sapra.ttrpg.forum.domain.entityObject.Topic;
 import by.sapra.ttrpg.forum.domain.query.FeedQuery;
 import by.sapra.ttrpg.forum.domain.query.TopicQuery;
-import by.sapra.ttrpg.forum.domain.aggregate.Topic;
 import by.sapra.ttrpg.forum.domain.entityObject.Comment;
-import by.sapra.ttrpg.forum.domain.entityObject.MessageInfo;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.*;
 import org.springframework.data.domain.Pageable;
 
