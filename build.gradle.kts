@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "4.1.1"
     id("io.spring.dependency-management") version "1.1.7"
+    id("org.hibernate.orm") version "7.4.5.Final"
 }
 
 group = "by.sapra.ttrpg"
