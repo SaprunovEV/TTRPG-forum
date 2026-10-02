@@ -1,7 +1,7 @@
 package by.sapra.ttrpg.forum.domain.query;
 
-import by.sapra.ttrpg.forum.domain.aggregate.TopicId;
+import by.sapra.ttrpg.forum.domain.aggregate.MessageId;
 import org.springframework.data.domain.Pageable;
 
-public record TopicQuery(TopicId aggregate, Pageable pageable) {
+public record TopicQuery(MessageId aggregate, Pageable pageable) {
 }
