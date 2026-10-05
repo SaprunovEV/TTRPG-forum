@@ -20,7 +20,7 @@ public interface TopicMapper {
     TopicQuery variableToQuery(MassageVariable variable, Pageable pageable);
 
     @Mapping(source = "category.id", target = "category")
-    @Mapping(source = "massageInfo.messageId.businessId", target = "topicId")
+    @Mapping(source = "messageInfo.messageId.businessId", target = "topicId")
     @Mapping(source = "body.title", target = "title")
     @Mapping(source = "body.content", target = "content")
     TopicResource entityToResource(Topic topicById);
