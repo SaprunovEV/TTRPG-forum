@@ -64,7 +64,10 @@ public interface TopicMapper {
     @Mapping(source = "author.userId", target = "authorId")
     MessageResource entityToResource(MessageInfo messageInfo);
 
-    LikeMessageCommand payloadToCommand(UserAuthId userId, MassageVariable variable, LikePayload payload);
+    @Mapping(source = "authorId.userId", target = "author.userId")
+    @Mapping(source = "variable.messageId", target = "messageId.businessId")
+    @Mapping(source = "payload.value", target = "like")
+    LikeMessageCommand payloadToCommand(UserAuthId authorId, MassageVariable variable, LikePayload payload);
 
     default Category map(UUID id) {
         if (id == null) return null;
