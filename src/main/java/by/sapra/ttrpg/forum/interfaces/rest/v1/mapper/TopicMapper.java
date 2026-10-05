@@ -50,6 +50,9 @@ public interface TopicMapper {
         return new PageResource<>(list.size(), list);
     }
 
+    @Mapping(source = "dateInfo.createAt", target = "date")
+    @Mapping(source = "messageId.businessId", target = "messageId")
+    @Mapping(source = "author.userId", target = "authorId")
     MessageResource entityToResource(MessageInfo messageInfo);
 
     LikeMessageCommand payloadToCommand(UserAuthId userId, MassageVariable variable, LikePayload payload);
