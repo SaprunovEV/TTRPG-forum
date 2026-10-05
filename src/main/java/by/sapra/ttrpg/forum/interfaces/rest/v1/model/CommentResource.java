@@ -6,6 +6,7 @@ import java.util.UUID;
 public record CommentResource(
         String commentId,
         String authorId,
+        String topicId,
         UUID parent,
         Instant date,
         String content
