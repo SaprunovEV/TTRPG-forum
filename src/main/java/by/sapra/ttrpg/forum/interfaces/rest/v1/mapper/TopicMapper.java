@@ -49,20 +49,10 @@ public interface TopicMapper {
     @Mapping(source = "userId.userId", target = "author.userId")
     FeedQuery variableToQuery(UserAuthId userId, Pageable pageable);
 
-    default PageResource<MessageResource> entitiesToPage(List<MessageInfo> activityToUser) {
-        List<MessageResource> list = activityToUser.stream().map(this::entityToResource).toList();
-        return new PageResource<>(list.size(), list);
-    }
-    default PageResource<CommentResource> commentEntitiesToPage(List<Comment> activityToUser) {
-        List<CommentResource> list = activityToUser.stream().map(this::entityToResource).toList();
-        return new PageResource<>(list.size(), list);
-    }
-
     @Mapping(source = "dateInfo.createAt", target = "date")
     @Mapping(source = "messageId.businessId", target = "messageId")
     @Mapping(source = "author.userId", target = "authorId")
     MessageResource entityToResource(MessageInfo messageInfo);
-
     @Mapping(source = "authorId.userId", target = "author.userId")
     @Mapping(source = "variable.messageId", target = "messageId.businessId")
     @Mapping(source = "payload.value", target = "like")
@@ -74,5 +64,15 @@ public interface TopicMapper {
         Category category = new Category();
         category.setId(id);
         return category;
+    }
+
+    default PageResource<CommentResource> commentEntitiesToPage(List<Comment> activityToUser) {
+        List<CommentResource> list = activityToUser.stream().map(this::entityToResource).toList();
+        return new PageResource<>(list.size(), list);
+    }
+
+    default PageResource<MessageResource> entitiesToPage(List<MessageInfo> activityToUser) {
+        List<MessageResource> list = activityToUser.stream().map(this::entityToResource).toList();
+        return new PageResource<>(list.size(), list);
     }
 }
