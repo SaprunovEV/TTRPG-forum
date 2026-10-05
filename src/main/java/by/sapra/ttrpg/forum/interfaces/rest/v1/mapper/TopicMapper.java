@@ -8,12 +8,16 @@ import by.sapra.ttrpg.forum.domain.entityObject.Comment;
 import by.sapra.ttrpg.forum.domain.entityObject.Topic;
 import by.sapra.ttrpg.forum.domain.query.FeedQuery;
 import by.sapra.ttrpg.forum.domain.query.TopicQuery;
+import by.sapra.ttrpg.forum.domain.valueObject.Category;
+import by.sapra.ttrpg.forum.domain.valueObject.TopicBody;
+import by.sapra.ttrpg.forum.domain.valueObject.TopicStatus;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.UUID;
 
 @Mapper
 public interface TopicMapper {
@@ -27,6 +31,9 @@ public interface TopicMapper {
     @Mapping(source = "messageInfo.author.userId", target = "authorId")
     TopicResource entityToResource(Topic topicById);
 
+    @Mapping(source = "userId.userId", target = "author.userId")
+    @Mapping(source = "payload.title", target = "body.title")
+    @Mapping(source = "payload.content", target = "body.content")
     AddNewTopicCommand payloadToCommand(UserAuthId userId, PostTopicPayload payload);
 
     CommentTopicCommand payloadToCommand(UserAuthId userId, MassageVariable topicId, PostCommentPayload payload);
@@ -56,4 +63,12 @@ public interface TopicMapper {
     MessageResource entityToResource(MessageInfo messageInfo);
 
     LikeMessageCommand payloadToCommand(UserAuthId userId, MassageVariable variable, LikePayload payload);
+
+    default Category map(UUID id) {
+        if (id == null) return null;
+
+        Category category = new Category();
+        category.setId(id);
+        return category;
+    }
 }
