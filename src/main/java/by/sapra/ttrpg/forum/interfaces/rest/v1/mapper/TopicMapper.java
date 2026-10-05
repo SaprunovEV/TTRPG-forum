@@ -31,6 +31,12 @@ public interface TopicMapper {
 
     CommentTopicCommand payloadToCommand(UserAuthId userId, MassageVariable topicId, PostCommentPayload payload);
 
+    @Mapping(source = "topic.id", target = "topicId")
+    @Mapping(source = "id", target = "commentId")
+    @Mapping(source = "content", target = "content")
+    @Mapping(source = "parentComment.id", target = "parent")
+    @Mapping(source = "messageInfo.author.userId", target = "authorId")
+    @Mapping(source = "messageInfo.dateInfo.createAt", target = "date")
     CommentResource entityToResource(Comment comment);
 
     FeedQuery variableToQuery(UserAuthId userId, Pageable pageable);
