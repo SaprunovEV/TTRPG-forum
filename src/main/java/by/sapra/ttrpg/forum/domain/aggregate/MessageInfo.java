@@ -3,6 +3,7 @@ package by.sapra.ttrpg.forum.domain.aggregate;
 import by.sapra.ttrpg.forum.domain.entityObject.Comment;
 import by.sapra.ttrpg.forum.domain.entityObject.Topic;
 import by.sapra.ttrpg.forum.domain.valueObject.DateInfo;
+import by.sapra.ttrpg.forum.domain.valueObject.MessageType;
 import by.sapra.ttrpg.forum.domain.valueObject.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -41,6 +42,10 @@ public class MessageInfo {
 
     @OneToOne(mappedBy = "messageInfo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Comment comment;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false, length = 20)
+    private MessageType type;
 
     @Override
     public boolean equals(Object o) {
