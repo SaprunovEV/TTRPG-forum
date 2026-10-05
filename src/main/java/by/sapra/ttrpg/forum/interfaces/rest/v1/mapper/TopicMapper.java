@@ -46,6 +46,7 @@ public interface TopicMapper {
     @Mapping(source = "messageInfo.dateInfo.createAt", target = "date")
     CommentResource entityToResource(Comment comment);
 
+    @Mapping(source = "userId.userId", target = "author.userId")
     FeedQuery variableToQuery(UserAuthId userId, Pageable pageable);
 
     default PageResource<MessageResource> entitiesToPage(List<MessageInfo> activityToUser) {

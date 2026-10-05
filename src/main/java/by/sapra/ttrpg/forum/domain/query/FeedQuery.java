@@ -1,4 +1,7 @@
 package by.sapra.ttrpg.forum.domain.query;
 
-public record FeedQuery() {
+import by.sapra.ttrpg.forum.domain.valueObject.User;
+import org.springframework.data.domain.Pageable;
+
+public record FeedQuery(User author, Pageable pageable) {
 }
