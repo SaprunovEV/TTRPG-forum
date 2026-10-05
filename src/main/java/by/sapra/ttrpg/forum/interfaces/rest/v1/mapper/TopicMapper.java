@@ -9,8 +9,6 @@ import by.sapra.ttrpg.forum.domain.entityObject.Topic;
 import by.sapra.ttrpg.forum.domain.query.FeedQuery;
 import by.sapra.ttrpg.forum.domain.query.TopicQuery;
 import by.sapra.ttrpg.forum.domain.valueObject.Category;
-import by.sapra.ttrpg.forum.domain.valueObject.TopicBody;
-import by.sapra.ttrpg.forum.domain.valueObject.TopicStatus;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
