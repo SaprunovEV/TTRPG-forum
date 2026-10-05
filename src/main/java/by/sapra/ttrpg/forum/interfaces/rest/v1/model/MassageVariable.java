@@ -4,6 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public record MassageVariable(
         @NotBlank(message = "messageId обязателен")
-        String massageId
+        String messageId
 ) {
 }
