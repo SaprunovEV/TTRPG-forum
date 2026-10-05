@@ -17,12 +17,14 @@ import java.util.List;
 
 @Mapper
 public interface TopicMapper {
+    @Mapping(source = "variable.messageId", target = "messageId.businessId")
     TopicQuery variableToQuery(MassageVariable variable, Pageable pageable);
 
     @Mapping(source = "category.id", target = "category")
     @Mapping(source = "messageInfo.messageId.businessId", target = "topicId")
     @Mapping(source = "body.title", target = "title")
     @Mapping(source = "body.content", target = "content")
+    @Mapping(source = "messageInfo.author.userId", target = "authorId")
     TopicResource entityToResource(Topic topicById);
 
     AddNewTopicCommand payloadToCommand(UserAuthId userId, PostTopicPayload payload);
