@@ -53,6 +53,7 @@ public interface TopicMapper {
     @Mapping(source = "messageId.businessId", target = "messageId")
     @Mapping(source = "author.userId", target = "authorId")
     MessageResource entityToResource(MessageInfo messageInfo);
+
     @Mapping(source = "authorId.userId", target = "author.userId")
     @Mapping(source = "variable.messageId", target = "messageId.businessId")
     @Mapping(source = "payload.value", target = "like")
