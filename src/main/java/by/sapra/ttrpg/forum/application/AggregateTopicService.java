@@ -8,15 +8,20 @@ import by.sapra.ttrpg.forum.domain.entityObject.Comment;
 import by.sapra.ttrpg.forum.domain.entityObject.Topic;
 import by.sapra.ttrpg.forum.domain.query.FeedQuery;
 import by.sapra.ttrpg.forum.domain.query.TopicQuery;
+import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.MessageRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AggregateTopicService implements TopicService {
+    private final MessageRepository repository;
+
     @Override
-    public Topic addNewTopic(AddNewTopicCommand addNewTopicCommand) {
-        return null;
+    public Topic addNewTopic(AddNewTopicCommand command) {
+        return repository.save(new MessageInfo(command)).getTopic();
     }
 
     @Override

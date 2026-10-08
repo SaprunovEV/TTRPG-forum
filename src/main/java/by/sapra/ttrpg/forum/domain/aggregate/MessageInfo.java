@@ -1,5 +1,6 @@
 package by.sapra.ttrpg.forum.domain.aggregate;
 
+import by.sapra.ttrpg.forum.domain.command.AddNewTopicCommand;
 import by.sapra.ttrpg.forum.domain.entityObject.Comment;
 import by.sapra.ttrpg.forum.domain.entityObject.Topic;
 import by.sapra.ttrpg.forum.domain.valueObject.DateInfo;
@@ -46,6 +47,17 @@ public class MessageInfo {
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false, length = 20)
     private MessageType type;
+
+    public MessageInfo(AddNewTopicCommand command) {
+        this.messageId = generateAggregateId();
+        this.author = command.author();
+        this.topic = new Topic(command, this);
+        this.type = MessageType.TOPIC;
+    }
+
+    private MessageId generateAggregateId() {
+        return new MessageId(UUID.randomUUID().toString());
+    }
 
     @Override
     public boolean equals(Object o) {

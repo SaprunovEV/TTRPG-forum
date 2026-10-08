@@ -1,6 +1,7 @@
 package by.sapra.ttrpg.forum.domain.entityObject;
 
 import by.sapra.ttrpg.forum.domain.aggregate.MessageInfo;
+import by.sapra.ttrpg.forum.domain.command.AddNewTopicCommand;
 import by.sapra.ttrpg.forum.domain.valueObject.Category;
 import by.sapra.ttrpg.forum.domain.valueObject.TopicBody;
 import jakarta.persistence.*;
@@ -36,6 +37,13 @@ public class Topic {
 
     @OneToMany(mappedBy = "topic")
     private List<Comment> comments;
+
+    public Topic(AddNewTopicCommand command, MessageInfo messageInfo) {
+        this.body = command.body();
+        this.category = command.category();
+        this.messageInfo = messageInfo;
+        this.comments = List.of();
+    }
 
     @Override
     public boolean equals(Object o) {
