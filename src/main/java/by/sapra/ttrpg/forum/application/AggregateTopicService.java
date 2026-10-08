@@ -1,5 +1,6 @@
 package by.sapra.ttrpg.forum.application;
 
+import by.sapra.ttrpg.forum.application.checker.CategoryExistenceChecker;
 import by.sapra.ttrpg.forum.domain.aggregate.MessageInfo;
 import by.sapra.ttrpg.forum.domain.command.AddNewTopicCommand;
 import by.sapra.ttrpg.forum.domain.command.CommentTopicCommand;
@@ -18,9 +19,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AggregateTopicService implements TopicService {
     private final MessageRepository repository;
+    private final CategoryExistenceChecker existenceChecker;
 
     @Override
     public Topic addNewTopic(AddNewTopicCommand command) {
+        existenceChecker.ensureExists(command.category());
+
         return repository.save(new MessageInfo(command)).getTopic();
     }
 
