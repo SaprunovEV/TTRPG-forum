@@ -36,6 +36,7 @@ public interface TopicMapper {
 
     @Mapping(source = "authorId.userId", target = "author.userId")
     @Mapping(source = "topicId.messageId", target = "topicId.businessId")
+    @Mapping(source = "payload.parentId", target = "parentId.businessId")
     CommentTopicCommand payloadToCommand(UserAuthId authorId, MassageVariable topicId, PostCommentPayload payload);
 
     @Mapping(source = "topic.id", target = "topicId")
