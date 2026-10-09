@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class TopicControllerAdvice {
 
     @ExceptionHandler(DomainException.class)
-    public ResponseEntity<ApplicationError<?>> handleClassNotFoundException(DomainException ex, HttpServletRequest request) {
+    public ResponseEntity<ApplicationError<?>> handleDomainException(DomainException ex, HttpServletRequest request) {
         ApplicationError<?> error = ApplicationError.builder()
                 .path(request.getRequestURI())
                 .code(404)
