@@ -10,4 +10,9 @@ public class TopicNotFoundException extends DomainException {
     public TopicNotFoundException(String message) {
         super(message);
     }
+
+    @Override
+    public <T> T getData() {
+        return null;
+    }
 }

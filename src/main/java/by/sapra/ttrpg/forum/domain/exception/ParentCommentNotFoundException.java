@@ -6,4 +6,9 @@ public class ParentCommentNotFoundException extends DomainException {
     public ParentCommentNotFoundException(MessageId parentId) {
         super(parentId.getBusinessId());
     }
+
+    @Override
+    public <T> T getData() {
+        return null;
+    }
 }

@@ -6,4 +6,9 @@ public class InvalidParentException extends DomainException {
     public InvalidParentException(MessageInfo parent) {
         super(parent.getMessageId().getBusinessId());
     }
+
+    @Override
+    public <T> T getData() {
+        return null;
+    }
 }

@@ -11,4 +11,9 @@ public class CategoryNotFoundException extends DomainException {
         super("Категория с id=%s не найдена".formatted(category.getId()));
         this.category = category;
     }
+
+    @Override
+    public Category getData() {
+        return category;
+    }
 }

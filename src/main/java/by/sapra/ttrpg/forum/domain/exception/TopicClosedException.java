@@ -6,4 +6,9 @@ public class TopicClosedException extends DomainException {
     public TopicClosedException(MessageId messageId) {
         super(messageId.getBusinessId());
     }
+
+    @Override
+    public <T> T getData() {
+        return null;
+    }
 }
