@@ -1,6 +1,9 @@
 package by.sapra.ttrpg.forum.domain.entityObject;
 
+import by.sapra.ttrpg.forum.domain.aggregate.MessageId;
 import by.sapra.ttrpg.forum.domain.aggregate.MessageInfo;
+import by.sapra.ttrpg.forum.domain.valueObject.MessageType;
+import by.sapra.ttrpg.forum.domain.valueObject.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +37,23 @@ public class Comment {
     @Column(name = "content")
     @ToString.Include
     private String content;
+
+    public static Comment create(String content, User author, MessageInfo topic, MessageInfo parent) {
+        Comment result = new Comment();
+
+        MessageInfo self = new MessageInfo();
+        self.setComment(result);
+        self.setAuthor(author);
+        self.setMessageId(new MessageId(UUID.randomUUID().toString()));
+        self.setType(MessageType.COMMENT);
+
+        result.setTopic(topic.getTopic());
+        result.setParentComment(parent!=null ? parent.getComment() : null);
+        result.setContent(content);
+        result.setMessageInfo(self);
+
+        return result;
+    }
 
     @Override
     public boolean equals(Object o) {
