@@ -6,6 +6,7 @@ import by.sapra.ttrpg.forum.domain.valueObject.Category;
 import by.sapra.ttrpg.forum.domain.valueObject.TopicBody;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
