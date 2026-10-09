@@ -1,6 +1,7 @@
 package by.sapra.ttrpg.forum.interfaces.rest.v1.controller;
 
 import by.sapra.ttrpg.forum.domain.exception.CategoryNotFoundException;
+import by.sapra.ttrpg.forum.domain.exception.DomainException;
 import by.sapra.ttrpg.forum.domain.exception.dictinary.ApplicationErrorCodes;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.ApplicationError;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.error.ApplicationValidationError;
@@ -13,26 +14,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.Instant;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class TopicControllerAdvice {
 
-    @ExceptionHandler(CategoryNotFoundException.class)
-    public ResponseEntity<ApplicationError<CategoryError>> handleClassNotFoundException(CategoryNotFoundException ex, HttpServletRequest request) {
-        ApplicationError<CategoryError> error = ApplicationError.<CategoryError>builder()
+    @ExceptionHandler(DomainException.class)
+    public ResponseEntity<ApplicationError<?>> handleClassNotFoundException(DomainException ex, HttpServletRequest request) {
+        ApplicationError<?> error = ApplicationError.builder()
                 .path(request.getRequestURI())
                 .code(404)
-                .title("Не найдена категория с id=%s".formatted(ex.getCategory().getId()))
+                .title("Не найдена категория с id=")
                 .message(ex.getMessage())
                 .timestamp(Instant.now())
                 .traceId("пока нету")
                 .errorCode(ApplicationErrorCodes.CATEGORY_NOT_FOUND)
-                .data(CategoryError.builder().categoryId(ex.getCategory().getId()).build())
+                .data(ex.getData())
                 .build();
 
         return ResponseEntity.badRequest().body(error);
