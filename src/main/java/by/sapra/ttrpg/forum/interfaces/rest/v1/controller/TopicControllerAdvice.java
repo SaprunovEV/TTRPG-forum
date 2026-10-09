@@ -1,18 +1,15 @@
 package by.sapra.ttrpg.forum.interfaces.rest.v1.controller;
 
-import by.sapra.ttrpg.forum.domain.exception.CategoryNotFoundException;
 import by.sapra.ttrpg.forum.domain.exception.DomainException;
 import by.sapra.ttrpg.forum.domain.exception.dictinary.ApplicationErrorCodes;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.ApplicationError;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.error.ApplicationValidationError;
-import by.sapra.ttrpg.forum.interfaces.rest.v1.model.error.CategoryError;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
