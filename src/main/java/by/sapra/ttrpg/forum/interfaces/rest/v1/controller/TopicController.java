@@ -93,7 +93,7 @@ public class TopicController {
                                 mapper.variableToQuery(owner, pageable))));
     }
 
-    @PutMapping("/{messageId}/like")
+    @PostMapping("/{messageId}/like")
     public ResponseEntity<Void> likeMessage(
             @RequestHeader("X-Auth-UserId") @Valid UserAuthId userId,
             @PathVariable("messageId") @Valid MassageVariable variable,
