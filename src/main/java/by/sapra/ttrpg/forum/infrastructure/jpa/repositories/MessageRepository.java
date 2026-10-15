@@ -25,4 +25,6 @@ public interface MessageRepository extends JpaRepository<MessageInfo, UUID> {
     }
 
     List<MessageInfo> findAllByAuthor(User author, Pageable pageable);
+
+    List<MessageInfo> findAllByAuthorIn(List<User> followers, Pageable pageable);
 }

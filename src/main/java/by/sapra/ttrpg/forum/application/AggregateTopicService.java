@@ -13,6 +13,7 @@ import by.sapra.ttrpg.forum.domain.exception.ParentCommentNotFoundException;
 import by.sapra.ttrpg.forum.domain.exception.TopicNotFoundException;
 import by.sapra.ttrpg.forum.domain.query.FeedQuery;
 import by.sapra.ttrpg.forum.domain.query.TopicQuery;
+import by.sapra.ttrpg.forum.domain.valueObject.User;
 import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.MessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class AggregateTopicService implements TopicService {
     private final MessageRepository repository;
     private final CategoryExistenceChecker existenceChecker;
     private final LikeService likeService;
+    private final SubscriberService subscriberService;
 
     @Override
     public Topic addNewTopic(AddNewTopicCommand command) {
@@ -73,7 +75,8 @@ public class AggregateTopicService implements TopicService {
 
     @Override
     public List<MessageInfo> getActivityToSubscriber(FeedQuery feedQuery) {
-        return List.of();
+        List<User> followers = subscriberService.findFollowers(feedQuery.author());
+        return repository.findAllByAuthorIn(followers, feedQuery.pageable());
     }
 
     @Override
