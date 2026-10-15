@@ -39,10 +39,10 @@ public interface TopicMapper {
     @Mapping(source = "payload.parentId", target = "parentId.businessId")
     CommentTopicCommand payloadToCommand(UserAuthId authorId, MassageVariable topicId, PostCommentPayload payload);
 
-    @Mapping(source = "topic.id", target = "topicId")
-    @Mapping(source = "id", target = "commentId")
+    @Mapping(source = "topic.messageInfo.messageId.businessId", target = "topicId")
+    @Mapping(source = "messageInfo.messageId.businessId", target = "commentId")
     @Mapping(source = "content", target = "content")
-    @Mapping(source = "parentComment.id", target = "parent")
+    @Mapping(source = "parentComment.messageInfo.messageId.businessId", target = "parent")
     @Mapping(source = "messageInfo.author.userId", target = "authorId")
     @Mapping(source = "messageInfo.dateInfo.createAt", target = "date")
     CommentResource entityToResource(Comment comment);
