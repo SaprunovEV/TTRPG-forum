@@ -13,8 +13,10 @@ import by.sapra.ttrpg.forum.domain.exception.ParentCommentNotFoundException;
 import by.sapra.ttrpg.forum.domain.exception.TopicNotFoundException;
 import by.sapra.ttrpg.forum.domain.query.FeedQuery;
 import by.sapra.ttrpg.forum.domain.query.TopicQuery;
+import by.sapra.ttrpg.forum.domain.valueObject.MessageType;
 import by.sapra.ttrpg.forum.domain.valueObject.User;
 import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.MessageRepository;
+import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AggregateTopicService implements TopicService {
     private final MessageRepository repository;
+    private final CommentRepository commentRepository;
     private final CategoryExistenceChecker existenceChecker;
     private final LikeService likeService;
     private final SubscriberService subscriberService;
@@ -40,7 +43,20 @@ public class AggregateTopicService implements TopicService {
 
     @Override
     public Topic findTopicById(TopicQuery aggregate) {
-        return null;
+        Optional<MessageInfo> optional = repository.findByMessageIdBusinessId(aggregate.messageId().getBusinessId());
+        if (optional.isPresent()) {
+            if (!optional.get().getType().equals(MessageType.TOPIC)) {
+                throw new TopicNotFoundException(aggregate.messageId());
+            }
+
+            Topic topic = optional.get().getTopic();
+
+            List<Comment> comments = commentRepository.findAllByTopic(topic, aggregate.pageable());
+            topic.setComments(comments);
+
+            return topic;
+        }
+        throw new TopicNotFoundException(aggregate.messageId());
     }
 
     @Override

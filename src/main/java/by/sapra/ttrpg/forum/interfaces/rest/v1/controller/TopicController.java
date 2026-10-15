@@ -28,7 +28,7 @@ public class TopicController {
     public ResponseEntity<TopicResource> findTopiById(
             @PathVariable("topicId") @Valid MassageVariable variable,
             @PageableDefault(size = 50,
-                    sort = "dateInfo.createdAt",
+                    sort = "messageInfo.dateInfo.createAt",
                     direction = Sort.Direction.ASC) Pageable pageable
     ) {
         return ResponseEntity.ok(
