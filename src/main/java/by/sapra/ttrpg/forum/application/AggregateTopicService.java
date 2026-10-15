@@ -78,7 +78,7 @@ public class AggregateTopicService implements TopicService {
 
     @Override
     public List<MessageInfo> getActivityToOwner(FeedQuery feedQuery) {
-        return List.of();
+        return repository.findAllByAuthor(feedQuery.author(), feedQuery.pageable());
     }
 
     @Override

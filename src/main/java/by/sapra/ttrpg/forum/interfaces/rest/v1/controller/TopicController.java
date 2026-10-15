@@ -84,7 +84,7 @@ public class TopicController {
     public ResponseEntity<PageResource<MessageResource>> getOwnerActivityFeed(
             @RequestHeader("X-Auth-UserId") @Valid UserAuthId owner,
             @PageableDefault(size = 50,
-                    sort = "dateInfo.createdAt",
+                    sort = "dateInfo.createAt",
                     direction = Sort.Direction.ASC) Pageable pageable
     ) {
         return ResponseEntity.ok(

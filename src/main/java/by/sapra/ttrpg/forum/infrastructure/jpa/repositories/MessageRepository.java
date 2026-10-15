@@ -2,6 +2,8 @@ package by.sapra.ttrpg.forum.infrastructure.jpa.repositories;
 
 import by.sapra.ttrpg.forum.domain.aggregate.MessageId;
 import by.sapra.ttrpg.forum.domain.aggregate.MessageInfo;
+import by.sapra.ttrpg.forum.domain.valueObject.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.*;
@@ -21,4 +23,6 @@ public interface MessageRepository extends JpaRepository<MessageInfo, UUID> {
                         Function.identity()
                 ));
     }
+
+    List<MessageInfo> findAllByAuthor(User author, Pageable pageable);
 }
