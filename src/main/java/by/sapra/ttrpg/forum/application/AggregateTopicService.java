@@ -8,6 +8,7 @@ import by.sapra.ttrpg.forum.domain.command.CommentTopicCommand;
 import by.sapra.ttrpg.forum.domain.command.LikeMessageCommand;
 import by.sapra.ttrpg.forum.domain.entityObject.Comment;
 import by.sapra.ttrpg.forum.domain.entityObject.Topic;
+import by.sapra.ttrpg.forum.domain.exception.LiceMessageException;
 import by.sapra.ttrpg.forum.domain.exception.ParentCommentNotFoundException;
 import by.sapra.ttrpg.forum.domain.exception.TopicNotFoundException;
 import by.sapra.ttrpg.forum.domain.query.FeedQuery;
@@ -19,12 +20,14 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AggregateTopicService implements TopicService {
     private final MessageRepository repository;
     private final CategoryExistenceChecker existenceChecker;
+    private final LikeService likeService;
 
     @Override
     public Topic addNewTopic(AddNewTopicCommand command) {
@@ -80,6 +83,10 @@ public class AggregateTopicService implements TopicService {
 
     @Override
     public void likeMessage(LikeMessageCommand likeMessageCommand) {
+        Optional<MessageInfo> optional = repository.findByMessageIdBusinessId(likeMessageCommand.messageId().getBusinessId());
 
+        optional.ifPresentOrElse(m -> {
+            likeService.save(likeMessageCommand.author(), m, likeMessageCommand.like());
+        }, () -> {throw new LiceMessageException(likeMessageCommand);});
     }
 }
