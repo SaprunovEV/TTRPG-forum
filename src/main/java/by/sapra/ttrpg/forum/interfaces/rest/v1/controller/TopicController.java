@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -18,6 +19,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/v1/topics")
 @RequiredArgsConstructor
+@Validated
 public class TopicController {
     private final TopicService service;
     private final TopicMapper mapper;

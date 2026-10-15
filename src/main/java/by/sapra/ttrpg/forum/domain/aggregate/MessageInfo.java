@@ -1,5 +1,7 @@
 package by.sapra.ttrpg.forum.domain.aggregate;
 
+import by.sapra.ttrpg.forum.domain.command.AddNewTopicCommand;
+import by.sapra.ttrpg.forum.domain.command.CommentTopicCommand;
 import by.sapra.ttrpg.forum.domain.entityObject.Comment;
 import by.sapra.ttrpg.forum.domain.entityObject.Topic;
 import by.sapra.ttrpg.forum.domain.valueObject.DateInfo;
@@ -7,6 +9,7 @@ import by.sapra.ttrpg.forum.domain.valueObject.MessageType;
 import by.sapra.ttrpg.forum.domain.valueObject.User;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -18,6 +21,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
 public class MessageInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -47,6 +51,23 @@ public class MessageInfo {
     @Column(name = "type", nullable = false, length = 20)
     private MessageType type;
 
+    public MessageInfo(AddNewTopicCommand command) {
+        this.messageId = generateAggregateId();
+        this.author = command.author();
+        this.topic = new Topic(command, this);
+        this.type = MessageType.TOPIC;
+    }
+
+    public MessageInfo(CommentTopicCommand command) {
+        this.messageId = generateAggregateId();
+        this.type = MessageType.COMMENT;
+        this.author = command.author();
+    }
+
+    private MessageId generateAggregateId() {
+        return new MessageId(UUID.randomUUID().toString());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,5 +78,15 @@ public class MessageInfo {
     @Override
     public int hashCode() {
         return Objects.hashCode(messageId);
+    }
+
+    private boolean isOpenForComments() {
+        return true;
+    }
+
+    public void commentTo(CommentTopicCommand command, MessageInfo topic, MessageInfo parent) {
+        this.comment = new Comment(command, this);
+
+        this.comment.commentTo(topic.getTopic(), parent != null ? parent.comment : null);
     }
 }
