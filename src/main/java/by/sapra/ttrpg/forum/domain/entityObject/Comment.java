@@ -1,11 +1,10 @@
 package by.sapra.ttrpg.forum.domain.entityObject;
 
-import by.sapra.ttrpg.forum.domain.aggregate.MessageId;
 import by.sapra.ttrpg.forum.domain.aggregate.MessageInfo;
-import by.sapra.ttrpg.forum.domain.valueObject.MessageType;
-import by.sapra.ttrpg.forum.domain.valueObject.User;
+import by.sapra.ttrpg.forum.domain.command.CommentTopicCommand;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -16,6 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -38,21 +38,9 @@ public class Comment {
     @ToString.Include
     private String content;
 
-    public static Comment create(String content, User author, MessageInfo topic, MessageInfo parent) {
-        Comment result = new Comment();
-
-        MessageInfo self = new MessageInfo();
-        self.setComment(result);
-        self.setAuthor(author);
-        self.setMessageId(new MessageId(UUID.randomUUID().toString()));
-        self.setType(MessageType.COMMENT);
-
-        result.setTopic(topic.getTopic());
-        result.setParentComment(parent!=null ? parent.getComment() : null);
-        result.setContent(content);
-        result.setMessageInfo(self);
-
-        return result;
+    public Comment(CommentTopicCommand command, MessageInfo messageInfo) {
+        this.content = command.content();
+        this.messageInfo = messageInfo;
     }
 
     @Override
@@ -65,5 +53,10 @@ public class Comment {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public void commentTo(Topic topic, Comment parentComment) {
+        this.parentComment = parentComment;
+        this.topic = topic;
     }
 }

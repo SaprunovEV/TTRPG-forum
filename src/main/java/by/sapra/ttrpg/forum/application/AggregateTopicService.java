@@ -59,11 +59,13 @@ public class AggregateTopicService implements TopicService {
             if (parent == null) throw new ParentCommentNotFoundException(parentId);
         }
 
-        Comment created = topic.addComment(command.content(), command.author(), parent);
+        var created = new MessageInfo(command);
 
-        repository.save(created.getMessageInfo());
+        created.commentTo(command, topic, parent);
 
-        return created;
+        repository.save(created);
+
+        return created.getComment();
     }
 
     @Override

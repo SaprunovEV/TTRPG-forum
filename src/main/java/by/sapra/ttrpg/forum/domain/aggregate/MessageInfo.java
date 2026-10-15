@@ -1,11 +1,9 @@
 package by.sapra.ttrpg.forum.domain.aggregate;
 
 import by.sapra.ttrpg.forum.domain.command.AddNewTopicCommand;
+import by.sapra.ttrpg.forum.domain.command.CommentTopicCommand;
 import by.sapra.ttrpg.forum.domain.entityObject.Comment;
 import by.sapra.ttrpg.forum.domain.entityObject.Topic;
-import by.sapra.ttrpg.forum.domain.exception.InvalidParentException;
-import by.sapra.ttrpg.forum.domain.exception.ParentFromDifferentTopicException;
-import by.sapra.ttrpg.forum.domain.exception.TopicClosedException;
 import by.sapra.ttrpg.forum.domain.valueObject.DateInfo;
 import by.sapra.ttrpg.forum.domain.valueObject.MessageType;
 import by.sapra.ttrpg.forum.domain.valueObject.User;
@@ -60,6 +58,12 @@ public class MessageInfo {
         this.type = MessageType.TOPIC;
     }
 
+    public MessageInfo(CommentTopicCommand command) {
+        this.messageId = generateAggregateId();
+        this.type = MessageType.COMMENT;
+        this.author = command.author();
+    }
+
     private MessageId generateAggregateId() {
         return new MessageId(UUID.randomUUID().toString());
     }
@@ -76,21 +80,13 @@ public class MessageInfo {
         return Objects.hashCode(messageId);
     }
 
-    public Comment addComment(String content, User author, MessageInfo parent) {
-        if (parent != null && parent.type != MessageType.COMMENT)
-            throw new InvalidParentException(parent);
-
-        if (parent != null && !parent.comment.getTopic().getId().equals(this.topic.getId())) {
-            throw new ParentFromDifferentTopicException(this, parent);
-        }
-
-        if (!this.isOpenForComments()) { //пока не реализована Todo
-            throw new TopicClosedException(this.getMessageId());
-        }
-        return Comment.create(content, author, this, parent);
-    }
-
     private boolean isOpenForComments() {
         return true;
+    }
+
+    public void commentTo(CommentTopicCommand command, MessageInfo topic, MessageInfo parent) {
+        this.comment = new Comment(command, this);
+
+        this.comment.commentTo(topic.getTopic(), parent != null ? parent.comment : null);
     }
 }
