@@ -71,7 +71,7 @@ public class TopicController {
     public ResponseEntity<PageResource<MessageResource>> getFollowingActivityFeed(
             @RequestHeader("X-Auth-UserId") @Valid UserAuthId subscriber,
             @PageableDefault(size = 50,
-                    sort = "dateInfo.createdAt",
+                    sort = "dateInfo.createAt",
                     direction = Sort.Direction.ASC) Pageable pageable
     ) {
         return ResponseEntity.ok(
