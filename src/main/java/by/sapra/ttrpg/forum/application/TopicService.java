@@ -16,7 +16,7 @@ public interface TopicService {
 
     Topic findTopicById(TopicQuery aggregate);
 
-    Comment commentMassage(CommentTopicCommand commentTopicCommand);
+    Comment commentMessage(CommentTopicCommand commentTopicCommand);
 
     List<MessageInfo> getActivityToSubscriber(FeedQuery feedQuery);
 

@@ -63,7 +63,7 @@ public class TopicController {
     ) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(mapper.entityToResource(
-                        service.commentMassage(
+                        service.commentMessage(
                                 mapper.payloadToCommand(author, topicId, payload))));
     }
 

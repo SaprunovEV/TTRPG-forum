@@ -60,7 +60,7 @@ public class AggregateTopicService implements TopicService {
     }
 
     @Override
-    public Comment commentMassage(CommentTopicCommand command) {
+    public Comment commentMessage(CommentTopicCommand command) {
 
         MessageId topicId  = command.topicId();
         MessageId parentId = command.parentId();
