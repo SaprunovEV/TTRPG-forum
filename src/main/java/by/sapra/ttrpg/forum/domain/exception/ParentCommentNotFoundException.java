@@ -2,13 +2,15 @@ package by.sapra.ttrpg.forum.domain.exception;
 
 import by.sapra.ttrpg.forum.domain.aggregate.MessageId;
 
+import java.util.Map;
+
 public class ParentCommentNotFoundException extends DomainException {
     public ParentCommentNotFoundException(MessageId parentId) {
         super(parentId.getBusinessId());
     }
 
     @Override
-    public <T> T getData() {
+    public Map<String, Object> getData() {
         return null;
     }
 }

@@ -3,6 +3,8 @@ package by.sapra.ttrpg.forum.domain.exception;
 import by.sapra.ttrpg.forum.domain.valueObject.Category;
 import lombok.Getter;
 
+import java.util.Map;
+
 public class CategoryNotFoundException extends DomainException {
     @Getter
     private Category category;
@@ -13,7 +15,7 @@ public class CategoryNotFoundException extends DomainException {
     }
 
     @Override
-    public Category getData() {
-        return category;
+    public Map<String, Object> getData() {
+        return Map.of("categoryId", category.getId());
     }
 }
