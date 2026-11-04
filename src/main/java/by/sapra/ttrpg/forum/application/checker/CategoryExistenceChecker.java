@@ -5,9 +5,11 @@ import by.sapra.ttrpg.forum.domain.valueObject.Category;
 import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CategoryExistenceChecker {
     private final CategoryRepository repository;
 

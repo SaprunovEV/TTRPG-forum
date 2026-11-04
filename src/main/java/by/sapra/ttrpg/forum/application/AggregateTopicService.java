@@ -19,6 +19,7 @@ import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.MessageRepository;
 import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class AggregateTopicService implements TopicService {
     private final MessageRepository repository;
     private final CommentRepository commentRepository;
@@ -35,6 +37,7 @@ public class AggregateTopicService implements TopicService {
     private final SubscriberService subscriberService;
 
     @Override
+    @Transactional
     public Topic addNewTopic(AddNewTopicCommand command) {
         existenceChecker.ensureExists(command.category());
 
@@ -60,6 +63,7 @@ public class AggregateTopicService implements TopicService {
     }
 
     @Override
+    @Transactional
     public Comment commentMessage(CommentTopicCommand command) {
 
         MessageId topicId  = command.topicId();
@@ -101,6 +105,7 @@ public class AggregateTopicService implements TopicService {
     }
 
     @Override
+    @Transactional
     public void likeMessage(LikeMessageCommand likeMessageCommand) {
         Optional<MessageInfo> optional = repository.findByMessageIdBusinessId(likeMessageCommand.messageId().getBusinessId());
 

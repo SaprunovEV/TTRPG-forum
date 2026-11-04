@@ -7,6 +7,7 @@ import by.sapra.ttrpg.forum.domain.valueObject.User;
 import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.LikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public class LikeServiceImpl implements LikeService {
     private final LikeRepository repository;
 
     @Override
+    @Transactional
     public void save(User user, MessageInfo messageInfo, Integer value) {
 
         Like like = new Like();
