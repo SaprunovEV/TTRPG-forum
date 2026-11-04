@@ -2,10 +2,10 @@ package by.sapra.ttrpg.forum.domain.exception;
 
 import by.sapra.ttrpg.forum.domain.command.LikeMessageCommand;
 
-public class LiceMessageException extends DomainException {
+public class LikeMessageException extends DomainException {
     private final LikeMessageCommand likeMessageCommand;
 
-    public LiceMessageException(LikeMessageCommand likeMessageCommand) {
+    public LikeMessageException(LikeMessageCommand likeMessageCommand) {
         super("");
         this.likeMessageCommand = likeMessageCommand;
     }
