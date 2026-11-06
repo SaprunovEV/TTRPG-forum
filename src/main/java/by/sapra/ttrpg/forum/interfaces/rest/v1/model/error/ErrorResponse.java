@@ -9,9 +9,10 @@ public record ErrorResponse(
         ApplicationErrorCodes code,
         String message,
         Map<String, Object> data,
+        String path,
         Instant timestamp) {
 
-    public static ErrorResponse of(ApplicationErrorCodes code, String message, Map<String, Object> data) {
-        return new ErrorResponse(code, message, data == null ? Map.of() : data, Instant.now());
+    public static ErrorResponse of(ApplicationErrorCodes code, String message, Map<String, Object> data, String path) {
+        return new ErrorResponse(code, message, data == null ? Map.of() : data, path, Instant.now());
     }
 }

@@ -31,7 +31,7 @@ public class TopicControllerAdvice {
 
         return ResponseEntity
                 .status(ex.getHttpStatus())
-                .body(ErrorResponse.of(ex.getErrorCode(), ex.getMessage(), ex.getData()));
+                .body(ErrorResponse.of(ex.getErrorCode(), ex.getMessage(), ex.getData(), request.getRequestURI()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
