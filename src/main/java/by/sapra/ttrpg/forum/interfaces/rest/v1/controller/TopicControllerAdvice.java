@@ -4,9 +4,11 @@ import by.sapra.ttrpg.forum.domain.exception.DomainException;
 import by.sapra.ttrpg.forum.domain.exception.dictinary.ApplicationErrorCodes;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.ApplicationError;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.error.ApplicationValidationError;
+import by.sapra.ttrpg.forum.interfaces.rest.v1.model.error.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,23 +20,18 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestControllerAdvice
 public class TopicControllerAdvice {
 
     @ExceptionHandler(DomainException.class)
-    public ResponseEntity<ApplicationError<?>> handleDomainException(DomainException ex, HttpServletRequest request) {
-        ApplicationError<?> error = ApplicationError.builder()
-                .path(request.getRequestURI())
-                .code(404)
-                .title("Не найдена категория с id=")
-                .message(ex.getMessage())
-                .timestamp(Instant.now())
-                .traceId("пока нету")
-                .errorCode(ApplicationErrorCodes.CATEGORY_NOT_FOUND)
-                .data(ex.getData())
-                .build();
+    public ResponseEntity<ErrorResponse> handleDomainException(DomainException ex, HttpServletRequest request) {
+        log.warn("Domain error: code={}, message={}, data={}",
+                ex.getErrorCode(), ex.getMessage(), ex.getData(), ex);
 
-        return ResponseEntity.badRequest().body(error);
+        return ResponseEntity
+                .status(ex.getHttpStatus())
+                .body(ErrorResponse.of(ex.getErrorCode(), ex.getMessage(), ex.getData()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
