@@ -2,10 +2,8 @@ package by.sapra.ttrpg.forum.domain.exception.dictinary;
 
 public enum ApplicationErrorCodes {
     VALIDATION_ERROR,
-    MALFORMED_REQUEST,
     CATEGORY_NOT_FOUND,
     TOPIC_NOT_FOUND,
     PARENT_COMMENT_NOT_FOUND,
-    LIKE_MESSAGE_FAILED,
-    INTERNAL_ERROR
+    LIKE_MESSAGE_FAILED
 }
