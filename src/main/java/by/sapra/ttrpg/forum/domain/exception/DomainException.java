@@ -10,14 +10,11 @@ public abstract class DomainException extends RuntimeException {
         super(message);
     }
 
-    /** Код ошибки для клиента (уходит в тело ответа). */
     public abstract ApplicationErrorCodes getErrorCode();
 
-    /** Дополнительные данные об ошибке. Никогда не возвращаем null. */
     public abstract Map<String, Object> getData();
 
-    /** HTTP-статус по умолчанию — 422 Unprocessable Entity. */
     public HttpStatus getHttpStatus() {
-        return HttpStatus.UNPROCESSABLE_ENTITY;
+        return HttpStatus.UNPROCESSABLE_CONTENT;
     }
 }
