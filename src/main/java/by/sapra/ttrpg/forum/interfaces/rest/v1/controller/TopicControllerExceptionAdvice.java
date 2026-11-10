@@ -1,7 +1,7 @@
 package by.sapra.ttrpg.forum.interfaces.rest.v1.controller;
 
 import by.sapra.ttrpg.forum.domain.exception.DomainException;
-import by.sapra.ttrpg.forum.domain.exception.dictinary.ApplicationErrorCodes;
+import by.sapra.ttrpg.forum.domain.exception.dictionary.ApplicationErrorCodes;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.ApplicationError;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.error.ApplicationValidationError;
 import by.sapra.ttrpg.forum.interfaces.rest.v1.model.error.ErrorResponse;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestControllerAdvice
-public class TopicControllerAdvice {
+public class TopicControllerExceptionAdvice {
 
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<ErrorResponse> handleDomainException(DomainException ex, HttpServletRequest request) {
