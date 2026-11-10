@@ -1,8 +1,10 @@
 package by.sapra.ttrpg.forum.domain.entityObject;
 
 import by.sapra.ttrpg.forum.domain.aggregate.MessageInfo;
+import by.sapra.ttrpg.forum.domain.command.CommentTopicCommand;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -13,6 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,6 +38,11 @@ public class Comment {
     @ToString.Include
     private String content;
 
+    public Comment(CommentTopicCommand command, MessageInfo messageInfo) {
+        this.content = command.content();
+        this.messageInfo = messageInfo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,5 +53,10 @@ public class Comment {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public void commentTo(Topic topic, Comment parentComment) {
+        this.parentComment = parentComment;
+        this.topic = topic;
     }
 }

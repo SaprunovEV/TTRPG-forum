@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -18,6 +19,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/v1/topics")
 @RequiredArgsConstructor
+@Validated
 public class TopicController {
     private final TopicService service;
     private final TopicMapper mapper;
@@ -26,7 +28,7 @@ public class TopicController {
     public ResponseEntity<TopicResource> findTopiById(
             @PathVariable("topicId") @Valid MassageVariable variable,
             @PageableDefault(size = 50,
-                    sort = "dateInfo.createdAt",
+                    sort = "messageInfo.dateInfo.createAt",
                     direction = Sort.Direction.ASC) Pageable pageable
     ) {
         return ResponseEntity.ok(
@@ -61,7 +63,7 @@ public class TopicController {
     ) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(mapper.entityToResource(
-                        service.commentMassage(
+                        service.commentMessage(
                                 mapper.payloadToCommand(author, topicId, payload))));
     }
 
@@ -69,7 +71,7 @@ public class TopicController {
     public ResponseEntity<PageResource<MessageResource>> getFollowingActivityFeed(
             @RequestHeader("X-Auth-UserId") @Valid UserAuthId subscriber,
             @PageableDefault(size = 50,
-                    sort = "dateInfo.createdAt",
+                    sort = "dateInfo.createAt",
                     direction = Sort.Direction.ASC) Pageable pageable
     ) {
         return ResponseEntity.ok(
@@ -82,7 +84,7 @@ public class TopicController {
     public ResponseEntity<PageResource<MessageResource>> getOwnerActivityFeed(
             @RequestHeader("X-Auth-UserId") @Valid UserAuthId owner,
             @PageableDefault(size = 50,
-                    sort = "dateInfo.createdAt",
+                    sort = "dateInfo.createAt",
                     direction = Sort.Direction.ASC) Pageable pageable
     ) {
         return ResponseEntity.ok(
@@ -91,7 +93,7 @@ public class TopicController {
                                 mapper.variableToQuery(owner, pageable))));
     }
 
-    @PutMapping("/{messageId}/like")
+    @PostMapping("/{messageId}/like")
     public ResponseEntity<Void> likeMessage(
             @RequestHeader("X-Auth-UserId") @Valid UserAuthId userId,
             @PathVariable("messageId") @Valid MassageVariable variable,
