@@ -1,4 +1,4 @@
-package by.sapra.ttrpg.forum.domain.exception.dictinary;
+package by.sapra.ttrpg.forum.domain.exception.dictionary;
 
 public enum ApplicationErrorCodes {
     VALIDATION_ERROR,

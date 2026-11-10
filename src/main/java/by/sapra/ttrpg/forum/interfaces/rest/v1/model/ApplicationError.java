@@ -1,6 +1,6 @@
 package by.sapra.ttrpg.forum.interfaces.rest.v1.model;
 
-import by.sapra.ttrpg.forum.domain.exception.dictinary.ApplicationErrorCodes;
+import by.sapra.ttrpg.forum.domain.exception.dictionary.ApplicationErrorCodes;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
