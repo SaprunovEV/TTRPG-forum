@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public interface MessageRepository extends JpaRepository<MessageInfo, UUID> {
+public interface MessageInfoRepository extends JpaRepository<MessageInfo, UUID> {
     Optional<MessageInfo> findByMessageIdBusinessId(String businessId);
 
     List<MessageInfo> findAllByMessageIdBusinessIdIn(Collection<String> businessIds);
