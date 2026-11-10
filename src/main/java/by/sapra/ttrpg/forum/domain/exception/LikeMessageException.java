@@ -1,7 +1,7 @@
 package by.sapra.ttrpg.forum.domain.exception;
 
 import by.sapra.ttrpg.forum.domain.command.LikeMessageCommand;
-import by.sapra.ttrpg.forum.domain.exception.dictinary.ApplicationErrorCodes;
+import by.sapra.ttrpg.forum.domain.exception.dictionary.ApplicationErrorCodes;
 
 import java.util.Map;
 

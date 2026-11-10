@@ -1,6 +1,6 @@
 package by.sapra.ttrpg.forum.domain.exception;
 
-import by.sapra.ttrpg.forum.domain.exception.dictinary.ApplicationErrorCodes;
+import by.sapra.ttrpg.forum.domain.exception.dictionary.ApplicationErrorCodes;
 import by.sapra.ttrpg.forum.domain.valueObject.Category;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

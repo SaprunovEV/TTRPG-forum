@@ -1,7 +1,7 @@
 package by.sapra.ttrpg.forum.domain.exception;
 
 import by.sapra.ttrpg.forum.domain.aggregate.MessageId;
-import by.sapra.ttrpg.forum.domain.exception.dictinary.ApplicationErrorCodes;
+import by.sapra.ttrpg.forum.domain.exception.dictionary.ApplicationErrorCodes;
 import org.springframework.http.HttpStatus;
 
 import java.util.Map;

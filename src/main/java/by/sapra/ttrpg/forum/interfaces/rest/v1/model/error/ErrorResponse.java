@@ -1,6 +1,6 @@
 package by.sapra.ttrpg.forum.interfaces.rest.v1.model.error;
 
-import by.sapra.ttrpg.forum.domain.exception.dictinary.ApplicationErrorCodes;
+import by.sapra.ttrpg.forum.domain.exception.dictionary.ApplicationErrorCodes;
 
 import java.time.Instant;
 import java.util.Map;
