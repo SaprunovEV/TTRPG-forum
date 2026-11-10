@@ -109,8 +109,6 @@ public class AggregateTopicService implements TopicService {
     public void likeMessage(LikeMessageCommand likeMessageCommand) {
         Optional<MessageInfo> optional = repository.findByMessageIdBusinessId(likeMessageCommand.messageId().getBusinessId());
 
-        optional.ifPresentOrElse(m -> {
-            likeService.save(likeMessageCommand.author(), m, likeMessageCommand.like());
-        }, () -> {throw new LikeMessageException(likeMessageCommand);});
+        optional.ifPresentOrElse(m -> likeService.save(likeMessageCommand.author(), m, likeMessageCommand.like()), () -> {throw new LikeMessageException(likeMessageCommand);});
     }
 }
