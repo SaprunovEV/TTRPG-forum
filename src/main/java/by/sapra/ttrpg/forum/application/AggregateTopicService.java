@@ -15,7 +15,7 @@ import by.sapra.ttrpg.forum.domain.query.FeedQuery;
 import by.sapra.ttrpg.forum.domain.query.TopicQuery;
 import by.sapra.ttrpg.forum.domain.valueObject.MessageType;
 import by.sapra.ttrpg.forum.domain.valueObject.User;
-import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.MessageRepository;
+import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.MessageInfoRepository;
 import by.sapra.ttrpg.forum.infrastructure.jpa.repositories.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class AggregateTopicService implements TopicService {
-    private final MessageRepository repository;
+    private final MessageInfoRepository repository;
     private final CommentRepository commentRepository;
     private final CategoryExistenceChecker existenceChecker;
     private final LikeService likeService;
@@ -84,13 +84,13 @@ public class AggregateTopicService implements TopicService {
             if (parent == null) throw new ParentCommentNotFoundException(parentId);
         }
 
-        var created = new MessageInfo(command);
+        MessageInfo userMessage = new MessageInfo(command);
 
-        created.commentTo(command, topic, parent);
+        userMessage.commentTo(command, topic, parent);
 
-        repository.save(created);
+        repository.save(userMessage);
 
-        return created.getComment();
+        return userMessage.getComment();
     }
 
     @Override
