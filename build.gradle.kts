@@ -20,6 +20,8 @@ repositories {
 }
 
 dependencies {
+//    aspect
+    implementation("org.springframework.boot:spring-boot-starter-aspectj")
 //    web
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
